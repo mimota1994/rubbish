@@ -45,7 +45,13 @@ public class DeviceStatusServiceImpl implements IDeviceStatusService {
             deviceStatusMapper.update(deviceStatus);
         }
         if(type == 2){
-            // TODO: 2018-07-31 处理上下线消息 
+            // TODO: 2018-07-31 处理上下线消息
+            int dev_id = (Integer)mapMsg.get("dev_id");
+            int status = (Integer)mapMsg.get("status");
+
+            DeviceStatus deviceStatus = checkDeviceStatus(dev_id);
+            deviceStatus.setStatus(status);
+            deviceStatusMapper.update(deviceStatus);
         }
     }
 
