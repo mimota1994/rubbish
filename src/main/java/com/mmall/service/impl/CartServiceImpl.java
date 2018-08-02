@@ -1,18 +1,16 @@
 package com.mmall.service.impl;
 
-import com.google.common.collect.Interner;
 import com.google.common.collect.Lists;
 import com.mmall.common.Const;
 import com.mmall.common.ResponseCode;
 import com.mmall.common.ServiceResponse;
 import com.mmall.dao.CartMapper;
-import com.mmall.dao.DeviceMapper;
+import com.mmall.dao.DeviceStatusMapper;
 import com.mmall.dao.ProductMapper;
 import com.mmall.pojo.Cart;
-import com.mmall.pojo.Device;
+import com.mmall.pojo.DeviceStatus;
 import com.mmall.pojo.Product;
 import com.mmall.service.ICartService;
-import com.mmall.service.ICategoryService;
 import com.mmall.util.BigDecimalUtil;
 import com.mmall.util.PropertiesUtil;
 import com.mmall.vo.CartProductVo;
@@ -21,9 +19,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
-import java.util.Date;
 import java.util.List;
-import java.util.Properties;
 
 /**
  * Created by huangzhigang on 18-6-5.
@@ -38,11 +34,11 @@ public class CartServiceImpl implements ICartService {
     private ProductMapper productMapper;
 
     @Autowired
-    private DeviceMapper deviceMapper;
+    private DeviceStatusMapper deviceMapper;
 
     public ServiceResponse<CartVo> add() {
 
-        Device device = deviceMapper.selectByPrimaryKey(100);
+        DeviceStatus device = deviceMapper.selectByPrimaryKey(100);
 
 
 

@@ -4,25 +4,33 @@
   <resultMap id="BaseResultMap" type="com.mmall.pojo.Device" >
     <constructor >
       <idArg column="id" jdbcType="INTEGER" javaType="java.lang.Integer" />
-      <arg column="tem" jdbcType="FLOAT" javaType="java.lang.Float" />
-      <arg column="hum" jdbcType="FLOAT" javaType="java.lang.Float" />
-      <arg column="status" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="imei" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="objId" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="objInstId" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="resId" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="title" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="desc" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="protocol" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="lon" jdbcType="FLOAT" javaType="java.lang.Float" />
+      <arg column="lat" jdbcType="FLOAT" javaType="java.lang.Float" />
+      <arg column="imsi" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="obsv" jdbcType="BIT" javaType="java.lang.Boolean" />
       <arg column="create_time" jdbcType="TIMESTAMP" javaType="java.util.Date" />
       <arg column="update_time" jdbcType="TIMESTAMP" javaType="java.util.Date" />
     </constructor>
   </resultMap>
   <sql id="Base_Column_List" >
-    id, tem, hum, status, create_time, update_time
+    id, imei, objId, objInstId, resId, title, `desc`, protocol, protocol, lon, lat, imsi, obsv, create_time, update_time
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select
     <include refid="Base_Column_List" />
-    from device
+    from device_status
     where id = #{id,jdbcType=INTEGER}
   </select>
 
-  <update id="update" parameterType="com.mmall.pojo.Device" >
-    update device
+  <update id="update" parameterType="com.mmall.pojo.DeviceStatus" >
+    update device_status
     set
       tem = #{tem,jdbcType=FLOAT},
       hum = #{hum,jdbcType=FLOAT},
@@ -33,9 +41,10 @@
   </update>
 
   <insert id="insert" parameterType="com.mmall.pojo.Device" >
-    insert into device (id, tem, hum,
-      status, create_time, update_time)
-    values (#{id,jdbcType=INTEGER}, #{tem,jdbcType=INTEGER}, #{hum,jdbcType=INTEGER},
-      #{status,jdbcType=INTEGER}, now(), now())
+    insert into device (id, imei, objId,
+     objInstId, resId, title, `desc`, protocol, lon, lat, imsi, obsv, create_time, update_time)
+    values (#{id,jdbcType=INTEGER}, #{imei,jdbcType=VARCHAR}, #{objId,jdbcType=INTEGER},
+      #{objInstId,jdbcType=INTEGER}, #{resId,jdbcType=INTEGER},#{title,jdbcType=VARCHAR},#{desc,jdbcType=VARCHAR},#{protocol,jdbcType=VARCHAR},#{lon,jdbcType=FLOAT},
+      #{lat,jdbcType=FLOAT},#{imsi,jdbcType=INTEGER},#{obsv,jdbcType=BIT},now(), now())
   </insert>
 </mapper>

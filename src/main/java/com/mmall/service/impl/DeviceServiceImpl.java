@@ -3,61 +3,30 @@ package com.mmall.service.impl;
 import com.mmall.dao.DeviceMapper;
 import com.mmall.pojo.Device;
 import com.mmall.service.IDeviceService;
-import com.mmall.util.DateTimeUtil;
-import com.mmall.util.dsUtil;
+import com.mmall.util.HttpSendCenter;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
+import org.springframework.stereotype.Service;
 
-import javax.swing.*;
-import java.text.DateFormat;
-import java.util.Date;
-import java.util.Map;
-
-@Controller("iDeviceService")
+@Service("iDeviceService")
 public class DeviceServiceImpl implements IDeviceService {
-
     @Autowired
     private DeviceMapper deviceMapper;
-
     @Override
-    public void updateDevice(Object msg) {
-        Map mapMsg = (Map) msg;
-        int type = (Integer)mapMsg.get("type");
-        if(type == 1){
-            int dev_id = (Integer)mapMsg.get("dev_id");
-            String ds_id = (String)mapMsg.get("ds_id");
+    public void addDevice(String title, String imei, String imsi,String apiKey) {
+        // TODO: 2018-08-01 装配device
+        Device device = new Device(title, imei, imsi);
 
-            String at_time = ((Long)mapMsg.get("at")).toString();
-            Date time = DateTimeUtil.stampToDate(at_time);
+        JSONObject msg = HttpSendCenter.post(apiKey,device.toUrl(),device.toJsonObject());
+        int errno = (int)msg.get("errno");
+        String error = (String)msg.get("error");
+        JSONObject data = (JSONObject)msg.get("data");
+        String str_dev_id = (String)data.get("device_id");
+        int dev_id = Integer.valueOf(str_dev_id).intValue();
 
-            Double value = (Double)mapMsg.get("value");
+        device.setId(dev_id);
 
-            Device device = checkDevice(dev_id);
+        deviceMapper.insert(device);
 
-            String[] dsArray = dsUtil.splitDs(ds_id);
-
-            String a = dsArray[0];
-            if(a .equals("3303")){
-                device.setTem(value.floatValue());
-            }else{
-                device.setHum(value.floatValue());
-            }
-
-            deviceMapper.update(device);
-        }
-        if(type == 2){
-            // TODO: 2018-07-31 处理上下线消息 
-        }
-    }
-
-    public void addDevice(Device device){
-        int rowCount = deviceMapper.insert(device);
-    }
-
-    public Device checkDevice(Integer Id){
-        Device device = deviceMapper.selectByPrimaryKey(Id);
-        return device;
-    }
-
-
+     }
 }

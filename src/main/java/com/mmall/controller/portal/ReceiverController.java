@@ -1,13 +1,10 @@
 package com.mmall.controller.portal;
 
-import com.mmall.service.IDeviceService;
+import com.mmall.service.IDeviceStatusService;
 import com.mmall.util.Util;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
-import org.springframework.http.HttpEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -29,7 +26,7 @@ public class ReceiverController {
     private static Logger logger = LoggerFactory.getLogger(ReceiverController.class);
 
     @Autowired
-    private IDeviceService iDeviceService;
+    private IDeviceStatusService iDeviceStatusService;
 
     @RequestMapping(value = "receive.do",method = RequestMethod.POST)
     @ResponseBody
@@ -51,7 +48,7 @@ public class ReceiverController {
             if (true){
                 //存到mysql
                 Object msg = obj.getMsg();
-                iDeviceService.updateDevice(msg);
+                iDeviceStatusService.updateDeviceStatus(msg);
 
                 logger.info("data receive: content" + obj.toString());
             }else {
