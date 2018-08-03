@@ -13,7 +13,7 @@
       <arg column="protocol" jdbcType="VARCHAR" javaType="java.lang.String" />
       <arg column="lon" jdbcType="FLOAT" javaType="java.lang.Float" />
       <arg column="lat" jdbcType="FLOAT" javaType="java.lang.Float" />
-      <arg column="imsi" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="imsi" jdbcType="VARCHAR" javaType="java.lang.String" />
       <arg column="obsv" jdbcType="BIT" javaType="java.lang.Boolean" />
       <arg column="create_time" jdbcType="TIMESTAMP" javaType="java.util.Date" />
       <arg column="update_time" jdbcType="TIMESTAMP" javaType="java.util.Date" />
@@ -47,4 +47,11 @@
       #{objInstId,jdbcType=INTEGER}, #{resId,jdbcType=INTEGER},#{title,jdbcType=VARCHAR},#{desc,jdbcType=VARCHAR},#{protocol,jdbcType=VARCHAR},#{lon,jdbcType=FLOAT},
       #{lat,jdbcType=FLOAT},#{imsi,jdbcType=INTEGER},#{obsv,jdbcType=BIT},now(), now())
   </insert>
+
+  <select id="selectAllDevice" resultMap="BaseResultMap" >
+    select
+    <include refid="Base_Column_List" />
+    from device
+    where 1 = 1
+  </select>
 </mapper>

@@ -76,6 +76,23 @@ public class Device {
         this.protocol = "LWM2M";
     }
 
+    public Device(Integer id, String imei, Integer objId, Integer objInstId, Integer resId, String title, String desc, String protocol, Float lon, Float lat,String imsi, Boolean obsv, Date cteateTime, Date updateTime ) {
+        this.imei = imei;
+        this.objId = objId;
+        this.objInstId = objInstId;
+        this.resId = resId;
+        this.title = title;
+        this.desc = desc;
+        this.protocol = protocol;
+        this.lon = lon;
+        this.lat = lat;
+        this.cteateTime = cteateTime;
+        this.updateTime = updateTime;
+        this.imsi = imsi;
+        this.obsv = obsv;
+        this.id = id;
+    }
+
     public String getImei() {
         return imei;
     }

@@ -21,6 +21,7 @@ public class DeviceStatusServiceImpl implements IDeviceStatusService {
     @Override
     public void updateDeviceStatus(Object msg) {
         Map mapMsg = (Map) msg;
+        // TODO: 2018-08-02 msg如果是列表的话还得再考虑
         int type = (Integer)mapMsg.get("type");
         if(type == 1){
             int dev_id = (Integer)mapMsg.get("dev_id");

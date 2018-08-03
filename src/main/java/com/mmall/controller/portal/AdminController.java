@@ -5,12 +5,15 @@ import com.mmall.pojo.Device;
 import com.mmall.service.IDeviceService;
 import com.mmall.service.IDeviceStatusService;
 import com.mmall.util.HttpSendCenter;
+import com.mmall.vo.DeviceVo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.json.JSONObject;
+
+import java.util.List;
 
 
 @Controller
@@ -34,6 +37,16 @@ public class AdminController {
         iDeviceService.addDevice(title,imei,imsi,apiKey);
         // TODO: 2018-08-02 返回什么好呢？ 
 
+    }
+
+    @RequestMapping(value = "check_all_device.do", method = RequestMethod.GET)
+    @ResponseBody
+    public JSONObject checkAllDevice()  {
+
+        List<DeviceVo> deviceVoList = iDeviceService.checkAllDevice();
+        JSONObject msg = new JSONObject();
+        msg.put("data",deviceVoList);
+        return msg;
     }
 
 }
