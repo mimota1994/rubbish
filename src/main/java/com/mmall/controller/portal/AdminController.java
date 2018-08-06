@@ -1,15 +1,18 @@
 package com.mmall.controller.portal;
 
 import com.google.gson.JsonObject;
+import com.mmall.common.ServiceResponse;
 import com.mmall.pojo.Device;
 import com.mmall.service.IDeviceService;
 import com.mmall.service.IDeviceStatusService;
 import com.mmall.util.HttpSendCenter;
+import com.mmall.vo.DeviceListVo;
 import com.mmall.vo.DeviceVo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.*;
 import org.json.JSONObject;
 
@@ -30,23 +33,27 @@ public class AdminController {
     @ResponseBody
     public void addDevice(@RequestParam(value = "title") String title,
                         @RequestParam(value = "imei") String imei,
-                        @RequestParam(value = "imsi") String imsi)  {
+                        @RequestParam(value = "imsi") String imsi,
+                          @RequestParam(value = "lon") Float lon,
+                          @RequestParam(value = "lat") Float lat)  {
 
         logger.info("check: title:{} imei{} imsi:{}",title,imei,imsi);
 
-        iDeviceService.addDevice(title,imei,imsi,apiKey);
+        iDeviceService.addDevice(title,imei,imsi,lon,lat,apiKey);
         // TODO: 2018-08-02 返回什么好呢？ 
 
     }
 
     @RequestMapping(value = "check_all_device.do", method = RequestMethod.GET)
     @ResponseBody
-    public JSONObject checkAllDevice()  {
+    public ServiceResponse<DeviceListVo> checkAllDevice()  {
 
         List<DeviceVo> deviceVoList = iDeviceService.checkAllDevice();
-        JSONObject msg = new JSONObject();
-        msg.put("data",deviceVoList);
-        return msg;
+        DeviceListVo deviceListVo = new DeviceListVo();
+        deviceListVo.setDeviceVoList(deviceVoList);
+//        JSONObject msg = new JSONObject();
+//        msg.put("data",deviceVoList);
+        return ServiceResponse.creatBySuccess(deviceListVo);
     }
 
 }

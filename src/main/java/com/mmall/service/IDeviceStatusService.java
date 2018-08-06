@@ -7,7 +7,7 @@ public interface IDeviceStatusService {
 
     void updateDeviceStatus(Object msg);
 
-    void addDeviceStatus(DeviceStatus deviceStatus);
+    void addDeviceStatus(Integer Id);
 
     DeviceStatus checkDeviceStatus(Integer Id);
 }

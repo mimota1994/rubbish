@@ -24,6 +24,9 @@ public class DeviceStatus {
         this.updateTime = updateTime;
     }
 
+    public DeviceStatus() {
+    }
+
     public Integer getId() {
         return id;
     }

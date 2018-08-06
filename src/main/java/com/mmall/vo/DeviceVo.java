@@ -2,11 +2,13 @@ package com.mmall.vo;
 
 import org.json.JSONObject;
 
+import java.util.HashMap;
+
 public class DeviceVo {
 
     private Integer id;
 
-    private JSONObject location;
+    private HashMap location;
 
     private Integer status;
 
@@ -18,11 +20,11 @@ public class DeviceVo {
         this.id = id;
     }
 
-    public JSONObject getLocation() {
+    public HashMap getLocation() {
         return location;
     }
 
-    public void setLocation(JSONObject location) {
+    public void setLocation(HashMap location) {
         this.location = location;
     }
 

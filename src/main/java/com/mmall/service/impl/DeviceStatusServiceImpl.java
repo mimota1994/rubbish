@@ -56,7 +56,11 @@ public class DeviceStatusServiceImpl implements IDeviceStatusService {
         }
     }
 
-    public void addDeviceStatus(DeviceStatus deviceStatus){
+    public void addDeviceStatus(Integer Id){
+        DeviceStatus deviceStatus = new DeviceStatus();
+        deviceStatus.setStatus(0);
+        deviceStatus.setId(Id);
+
         int rowCount = deviceStatusMapper.insert(deviceStatus);
     }
 
@@ -64,6 +68,5 @@ public class DeviceStatusServiceImpl implements IDeviceStatusService {
         DeviceStatus deviceStatus = deviceStatusMapper.selectByPrimaryKey(Id);
         return deviceStatus;
     }
-
 
 }
