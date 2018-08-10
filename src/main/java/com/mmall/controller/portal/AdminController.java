@@ -3,6 +3,7 @@ package com.mmall.controller.portal;
 import com.google.gson.JsonObject;
 import com.mmall.common.ServiceResponse;
 import com.mmall.pojo.Device;
+import com.mmall.service.IAllDeviceStatusService;
 import com.mmall.service.IDeviceService;
 import com.mmall.service.IDeviceStatusService;
 import com.mmall.util.HttpSendCenter;
@@ -26,10 +27,13 @@ public class AdminController {
     @Autowired
     private IDeviceService iDeviceService;
 
+    @Autowired
+    private IAllDeviceStatusService iAllDeviceStatusService;
+
     private static Logger logger = LoggerFactory.getLogger(AdminController.class);
     String apiKey = "C7de=t7ZiP2J8rt3wGi5nHTJ9xk=";
 
-    @RequestMapping(value = "add_device.do", method = RequestMethod.GET)
+    @RequestMapping(value = "add_device.do")
     @ResponseBody
     public void addDevice(@RequestParam(value = "title") String title,
                         @RequestParam(value = "imei") String imei,
@@ -54,6 +58,13 @@ public class AdminController {
 //        JSONObject msg = new JSONObject();
 //        msg.put("data",deviceVoList);
         return ServiceResponse.creatBySuccess(deviceListVo);
+    }
+
+    @RequestMapping(value = "evaluate_device_status")
+    @ResponseBody
+    public ServiceResponse evaluateDeviceStatus(Integer device_id){
+        Float result = iAllDeviceStatusService.evaluateDeviceStatusByDeviceId(device_id);
+        return ServiceResponse.creatBySuccess(result);
     }
 
 }

@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.mmall.dao.DeviceStatusMapper" >
-  <resultMap id="BaseResultMap" type="com.mmall.pojo.DeviceStatus" >
+<mapper namespace="com.mmall.dao.AllDeviceStatusMapper" >
+  <resultMap id="BaseResultMap" type="com.mmall.pojo.AllDeviceStatus" >
     <constructor >
-      <idArg column="device_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <idArg column="id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="device_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
       <arg column="tem" jdbcType="FLOAT" javaType="java.lang.Float" />
       <arg column="hum" jdbcType="FLOAT" javaType="java.lang.Float" />
-      <arg column="status" jdbcType="INTEGER" javaType="java.lang.Integer" />
       <arg column="create_time" jdbcType="TIMESTAMP" javaType="java.util.Date" />
       <arg column="update_time" jdbcType="TIMESTAMP" javaType="java.util.Date" />
     </constructor>
   </resultMap>
   <sql id="Base_Column_List" >
-    device_id, tem, hum, status, create_time, update_time
+    id, device_id, tem, hum, create_time, update_time
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select
@@ -32,10 +32,24 @@
     where device_id = #{device_id,jdbcType=INTEGER}
   </update>
 
-  <insert id="insert" parameterType="com.mmall.pojo.DeviceStatus" >
-    insert into device_status (device_id, tem, hum,
-      status, create_time, update_time)
-    values (#{device_id,jdbcType=INTEGER}, #{tem,jdbcType=INTEGER}, #{hum,jdbcType=INTEGER},
-      #{status,jdbcType=INTEGER}, now(), now())
+  <insert id="insert" parameterType="com.mmall.pojo.AllDeviceStatus" >
+    insert into all_device_status (id,device_id, tem,hum, create_time, update_time)
+    values (#{id,jdbcType=INTEGER},#{device_id,jdbcType=INTEGER}, #{tem,jdbcType=FLOAT },#{hum,jdbcType=FLOAT },now(), now())
   </insert>
+
+  <select id="selectAllDevice" resultMap="BaseResultMap" >
+    select
+    <include refid="Base_Column_List" />
+    from device
+    where 1 = 1
+  </select>
+
+  <select id="selectByDeviceId" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select
+    <include refid="Base_Column_List" />
+    from all_device_status
+    where device_id = #{device_id,jdbcType=INTEGER}
+    order by create_time
+  </select>
+
 </mapper>

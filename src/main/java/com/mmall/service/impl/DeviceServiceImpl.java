@@ -42,7 +42,7 @@ public class DeviceServiceImpl implements IDeviceService {
         String str_dev_id = (String)data.get("device_id");
         int dev_id = Integer.valueOf(str_dev_id).intValue();
 
-        device.setId(dev_id);
+        device.setDeviceId(dev_id);
 
         deviceMapper.insert(device);
 
@@ -66,10 +66,10 @@ public class DeviceServiceImpl implements IDeviceService {
 
     private DeviceVo assembleDeviceVo(Device device){
         DeviceVo deviceVo = new DeviceVo();
-        int dev_id = device.getId();
+        int dev_id = device.getDeviceId();
         DeviceStatus deviceStatus = deviceStatusMapper.selectByPrimaryKey(dev_id);
 
-        deviceVo.setId(dev_id);
+        deviceVo.setDeviceId(dev_id);
         Float lon = device.getLon();
         Float lat = device.getLat();
         HashMap location = new HashMap();

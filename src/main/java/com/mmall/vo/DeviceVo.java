@@ -6,18 +6,18 @@ import java.util.HashMap;
 
 public class DeviceVo {
 
-    private Integer id;
+    private Integer deviceId;
 
     private HashMap location;
 
     private Integer status;
 
-    public Integer getId() {
-        return id;
+    public Integer getDeviceId() {
+        return deviceId;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setDeviceId(Integer deviceId) {
+        this.deviceId = deviceId;
     }
 
     public HashMap getLocation() {

@@ -1,0 +1,62 @@
+package com.mmall.pojo;
+
+import org.joda.time.DateTime;
+
+import java.util.Date;
+
+public class AllDeviceStatus {
+    private Integer id;
+    private Integer device_id;
+    private Float tem;
+    private Float hum;
+    private Date createTime;
+    private Date updateTime;
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public Integer getDevice_id() {
+        return device_id;
+    }
+
+    public void setDevice_id(Integer device_id) {
+        this.device_id = device_id;
+    }
+
+    public Float getTem() {
+        return tem;
+    }
+
+    public void setTem(Float tem) {
+        this.tem = tem;
+    }
+
+    public Float getHum() {
+        return hum;
+    }
+
+    public void setHum(Float hum) {
+        this.hum = hum;
+    }
+
+    public Date getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
+    }
+
+    public Date getUpdateTime() {
+        return updateTime;
+    }
+
+    public void setUpdateTime(Date updateTime) {
+        this.updateTime = updateTime;
+    }
+}

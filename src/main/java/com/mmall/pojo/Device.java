@@ -62,7 +62,7 @@ public class Device {
     // 其他信息，可填参数
 //    private JSONObject other;
 
-    private Integer id;
+    private Integer deviceId;
 
     /**
      * @param title，有字符或者数字组成，必填
@@ -76,7 +76,7 @@ public class Device {
         this.protocol = "LWM2M";
     }
 
-    public Device(Integer id, String imei, Integer objId, Integer objInstId, Integer resId, String title, String desc, String protocol, Float lon, Float lat,String imsi, Boolean obsv, Date cteateTime, Date updateTime ) {
+    public Device(Integer deviceId, String imei, Integer objId, Integer objInstId, Integer resId, String title, String desc, String protocol, Float lon, Float lat,String imsi, Boolean obsv, Date cteateTime, Date updateTime ) {
         this.imei = imei;
         this.objId = objId;
         this.objInstId = objInstId;
@@ -90,7 +90,7 @@ public class Device {
         this.updateTime = updateTime;
         this.imsi = imsi;
         this.obsv = obsv;
-        this.id = id;
+        this.deviceId = deviceId;
     }
 
     public String getImei() {
@@ -117,13 +117,12 @@ public class Device {
         this.resId = resId;
     }
 
-    public Integer getId() {
-
-        return id;
+    public Integer getDeviceId() {
+        return deviceId;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setDeviceId(Integer deviceId) {
+        this.deviceId = deviceId;
     }
 
     public void setObsv(Boolean obsv) {

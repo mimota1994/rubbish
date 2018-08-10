@@ -1,5 +1,6 @@
 package com.mmall.controller.portal;
 
+import com.mmall.service.IAllDeviceStatusService;
 import com.mmall.service.IDeviceStatusService;
 import com.mmall.util.Util;
 import org.slf4j.Logger;
@@ -28,6 +29,9 @@ public class ReceiverController {
     @Autowired
     private IDeviceStatusService iDeviceStatusService;
 
+    @Autowired
+    private IAllDeviceStatusService iAllDeviceStatusService;
+
     @RequestMapping(value = "receive.do",method = RequestMethod.POST)
     @ResponseBody
     public String receive( @RequestBody Object body) throws NoSuchPaddingException, InvalidKeyException, NoSuchAlgorithmException, IllegalBlockSizeException, BadPaddingException, InvalidAlgorithmParameterException {
@@ -48,6 +52,7 @@ public class ReceiverController {
             if (true){
                 //存到mysql
                 Object msg = obj.getMsg();
+                iAllDeviceStatusService.addAllDeviceStatus(msg);
                 iDeviceStatusService.updateDeviceStatus(msg);
 
                 logger.info("data receive: content" + obj.toString());

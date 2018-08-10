@@ -3,7 +3,7 @@
 <mapper namespace="com.mmall.dao.DeviceMapper" >
   <resultMap id="BaseResultMap" type="com.mmall.pojo.Device" >
     <constructor >
-      <idArg column="id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <idArg column="device_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
       <arg column="imei" jdbcType="VARCHAR" javaType="java.lang.String" />
       <arg column="objId" jdbcType="INTEGER" javaType="java.lang.Integer" />
       <arg column="objInstId" jdbcType="INTEGER" javaType="java.lang.Integer" />
@@ -20,13 +20,13 @@
     </constructor>
   </resultMap>
   <sql id="Base_Column_List" >
-    id, imei, objId, objInstId, resId, title, `desc`, protocol, protocol, lon, lat, imsi, obsv, create_time, update_time
+    device_id, imei, objId, objInstId, resId, title, `desc`, protocol, protocol, lon, lat, imsi, obsv, create_time, update_time
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select
     <include refid="Base_Column_List" />
     from device_status
-    where id = #{id,jdbcType=INTEGER}
+    where device_id = #{device_id,jdbcType=INTEGER}
   </select>
 
   <update id="update" parameterType="com.mmall.pojo.DeviceStatus" >
@@ -37,13 +37,13 @@
       status = #{status,jdbcType=INTEGER},
       create_time = #{createTime,jdbcType=TIMESTAMP},
       update_time = now()
-    where id = #{id,jdbcType=INTEGER}
+    where device_id = #{device_id,jdbcType=INTEGER}
   </update>
 
   <insert id="insert" parameterType="com.mmall.pojo.Device" >
-    insert into device (id, imei, objId,
+    insert into device (device_id, imei, objId,
      objInstId, resId, title, `desc`, protocol, lon, lat, imsi, obsv, create_time, update_time)
-    values (#{id,jdbcType=INTEGER}, #{imei,jdbcType=VARCHAR}, #{objId,jdbcType=INTEGER},
+    values (#{device_id,jdbcType=INTEGER}, #{imei,jdbcType=VARCHAR}, #{objId,jdbcType=INTEGER},
       #{objInstId,jdbcType=INTEGER}, #{resId,jdbcType=INTEGER},#{title,jdbcType=VARCHAR},#{desc,jdbcType=VARCHAR},#{protocol,jdbcType=VARCHAR},#{lon,jdbcType=FLOAT},
       #{lat,jdbcType=FLOAT},#{imsi,jdbcType=INTEGER},#{obsv,jdbcType=BIT},now(), now())
   </insert>

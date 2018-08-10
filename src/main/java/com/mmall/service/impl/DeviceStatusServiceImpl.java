@@ -59,7 +59,7 @@ public class DeviceStatusServiceImpl implements IDeviceStatusService {
     public void addDeviceStatus(Integer Id){
         DeviceStatus deviceStatus = new DeviceStatus();
         deviceStatus.setStatus(0);
-        deviceStatus.setId(Id);
+        deviceStatus.setDeviceId(Id);
 
         int rowCount = deviceStatusMapper.insert(deviceStatus);
     }

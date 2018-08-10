@@ -3,7 +3,7 @@ package com.mmall.pojo;
 import java.util.Date;
 
 public class DeviceStatus {
-    private Integer id;
+    private Integer deviceId;
 
     private Float tem;
 
@@ -15,8 +15,8 @@ public class DeviceStatus {
 
     private Date updateTime;
 
-    public DeviceStatus(Integer id, Float tem, Float hum, Integer status, Date createTime, Date updateTime) {
-        this.id = id;
+    public DeviceStatus(Integer deviceId, Float tem, Float hum, Integer status, Date createTime, Date updateTime) {
+        this.deviceId = deviceId;
         this.tem = tem;
         this.hum = hum;
         this.status = status;
@@ -27,12 +27,12 @@ public class DeviceStatus {
     public DeviceStatus() {
     }
 
-    public Integer getId() {
-        return id;
+    public Integer getDeviceId() {
+        return deviceId;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setDeviceId(Integer deviceId) {
+        this.deviceId = deviceId;
     }
 
     public float getTem() {
