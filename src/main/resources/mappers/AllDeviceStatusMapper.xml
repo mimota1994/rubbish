@@ -49,7 +49,7 @@
     <include refid="Base_Column_List" />
     from all_device_status
     where device_id = #{device_id,jdbcType=INTEGER}
-    order by create_time
+    order by create_time DESC
   </select>
 
 </mapper>

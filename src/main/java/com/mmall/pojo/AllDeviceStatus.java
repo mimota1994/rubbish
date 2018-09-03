@@ -12,6 +12,19 @@ public class AllDeviceStatus {
     private Date createTime;
     private Date updateTime;
 
+    public AllDeviceStatus(Integer id, Integer device_id, Float tem, Float hum, Date createTime, Date updateTime) {
+        this.id = id;
+        this.device_id = device_id;
+        this.tem = tem;
+        this.hum = hum;
+        this.createTime = createTime;
+        this.updateTime = updateTime;
+    }
+
+    public AllDeviceStatus(){
+
+    }
+
     public Integer getId() {
         return id;
     }

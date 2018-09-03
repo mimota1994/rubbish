@@ -11,6 +11,7 @@ import com.mmall.util.dsUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -66,7 +67,40 @@ public class AllDeviceStatusServiceImpl implements IAllDeviceStatusService {
     private Float evaluate(List<AllDeviceStatus> allDeviceStatusList){
         Float result = (float)0.0;
         // TODO: 2018-08-10 预测算法
+        AllDeviceStatus currentDeviceStatus = allDeviceStatusList.get(0);
+        List<AllDeviceStatus> maxAndMinList = new ArrayList<>();
+        boolean flag = true;
+        while (flag ==true){
+            try{
+                AllDeviceStatus minDeviceStatus = searchMinAndMax(currentDeviceStatus,allDeviceStatusList);
+                int index = allDeviceStatusList.indexOf(minDeviceStatus);
+                AllDeviceStatus maxDeviceStatus = allDeviceStatusList.get(index+1);
+                maxAndMinList.add(minDeviceStatus);
+                maxAndMinList.add(maxDeviceStatus);
+                //更新
+                currentDeviceStatus = allDeviceStatusList.get(index+2);
+            }catch (Exception e){
+                flag = false;
+            }
+        }
+
+        // TODO: 2018-08-10 计算平均值并且做出估计
         return result;
+    }
+
+
+    private AllDeviceStatus searchMinAndMax(AllDeviceStatus allDeviceStatus,List<AllDeviceStatus> allDeviceStatusList){
+        int index = allDeviceStatusList.indexOf(allDeviceStatus);
+        boolean flag = true;
+        while (flag ==true){
+            if(allDeviceStatusList.size()<=index+1 || allDeviceStatusList.get(index+1).getTem() > allDeviceStatusList.get(index).getTem()){
+                flag =false;
+            }else{
+                index = index+1;
+            }
+        }
+        return allDeviceStatusList.get(index);
+
     }
 
 //    public void addDeviceStatus(Integer Id){

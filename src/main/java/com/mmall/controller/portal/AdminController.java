@@ -60,7 +60,7 @@ public class AdminController {
         return ServiceResponse.creatBySuccess(deviceListVo);
     }
 
-    @RequestMapping(value = "evaluate_device_status")
+    @RequestMapping(value = "evaluate_device_status.do")
     @ResponseBody
     public ServiceResponse evaluateDeviceStatus(Integer device_id){
         Float result = iAllDeviceStatusService.evaluateDeviceStatusByDeviceId(device_id);
